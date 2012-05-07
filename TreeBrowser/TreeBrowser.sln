@@ -1,0 +1,77 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{FC26C455-17F0-4AA0-A79F-7E3E14F6B902}"
+	ProjectSection(SolutionItems) = preProject
+		LocalTestRun.testrunconfig = LocalTestRun.testrunconfig
+		TreeBrowser.vsmdi = TreeBrowser.vsmdi
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Server", "Server", "{AE1A63E6-B152-48F3-A837-B15E761A56B0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Client", "Client", "{A5C7DC40-D57A-4AE0-AD35-9487E403FBF3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{E9BA4968-9059-43F7-B255-CAB61F3732C0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TreeBrowser.DataPortal", "TreeBrowser.DataPortal\TreeBrowser.DataPortal.csproj", "{762C20E0-E1C2-4FA7-874C-5BCCA4BAC999}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TreeBrowser.ServiceTestHarness", "TreeBrowser.ServiceTestHarness\TreeBrowser.ServiceTestHarness.csproj", "{3B7ADA95-B0BE-4852-B9F6-13F62A39B885}"
+EndProject
+Project("{00000000-0000-0000-0000-000000000000}") = "TreeBrowser.SilverlightLib", "TreeBrowser.SilverlightLib\TreeBrowser.SilverlightLib.csproj", "{A18A821E-5746-4117-AA00-34687940CA78}"
+EndProject
+Project("{00000000-0000-0000-0000-000000000000}") = "TreeBrowser.Silverlight.Application", "TreeBrowser.Silverlight.Tree\TreeBrowser.Silverlight.Application.csproj", "{D77411DB-8A2C-4DB5-9041-1EC303DD200D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TreeBrowser.Server.Entities", "TreeBrowser.Server.Entities\TreeBrowser.Server.Entities.csproj", "{7EA94686-BBB1-476D-9920-7B1ABD05F5B2}"
+EndProject
+Project("{00000000-0000-0000-0000-000000000000}") = "TreeBrowser.Silverlight.Entities", "TreeBrowser.Silverlight.Entities\TreeBrowser.Silverlight.Entities.csproj", "{0D80CE0B-D53E-4F7B-9988-8A688EF6C68D}"
+EndProject
+Project("{00000000-0000-0000-0000-000000000000}") = "TreeBrowser.Silverlight.WebApplication", "TreeBrowser.Silverlight.WebApplication\TreeBrowser.Silverlight.WebApplication.csproj", "{421AAEB1-29CA-4496-8BAB-3C2EEC053E79}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{762C20E0-E1C2-4FA7-874C-5BCCA4BAC999}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{762C20E0-E1C2-4FA7-874C-5BCCA4BAC999}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{762C20E0-E1C2-4FA7-874C-5BCCA4BAC999}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{762C20E0-E1C2-4FA7-874C-5BCCA4BAC999}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B7ADA95-B0BE-4852-B9F6-13F62A39B885}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B7ADA95-B0BE-4852-B9F6-13F62A39B885}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B7ADA95-B0BE-4852-B9F6-13F62A39B885}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B7ADA95-B0BE-4852-B9F6-13F62A39B885}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A18A821E-5746-4117-AA00-34687940CA78}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A18A821E-5746-4117-AA00-34687940CA78}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A18A821E-5746-4117-AA00-34687940CA78}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A18A821E-5746-4117-AA00-34687940CA78}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D77411DB-8A2C-4DB5-9041-1EC303DD200D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D77411DB-8A2C-4DB5-9041-1EC303DD200D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D77411DB-8A2C-4DB5-9041-1EC303DD200D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D77411DB-8A2C-4DB5-9041-1EC303DD200D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7EA94686-BBB1-476D-9920-7B1ABD05F5B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7EA94686-BBB1-476D-9920-7B1ABD05F5B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7EA94686-BBB1-476D-9920-7B1ABD05F5B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7EA94686-BBB1-476D-9920-7B1ABD05F5B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D80CE0B-D53E-4F7B-9988-8A688EF6C68D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D80CE0B-D53E-4F7B-9988-8A688EF6C68D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D80CE0B-D53E-4F7B-9988-8A688EF6C68D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D80CE0B-D53E-4F7B-9988-8A688EF6C68D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{421AAEB1-29CA-4496-8BAB-3C2EEC053E79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{421AAEB1-29CA-4496-8BAB-3C2EEC053E79}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{421AAEB1-29CA-4496-8BAB-3C2EEC053E79}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{421AAEB1-29CA-4496-8BAB-3C2EEC053E79}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{762C20E0-E1C2-4FA7-874C-5BCCA4BAC999} = {AE1A63E6-B152-48F3-A837-B15E761A56B0}
+		{7EA94686-BBB1-476D-9920-7B1ABD05F5B2} = {AE1A63E6-B152-48F3-A837-B15E761A56B0}
+		{A18A821E-5746-4117-AA00-34687940CA78} = {A5C7DC40-D57A-4AE0-AD35-9487E403FBF3}
+		{D77411DB-8A2C-4DB5-9041-1EC303DD200D} = {A5C7DC40-D57A-4AE0-AD35-9487E403FBF3}
+		{0D80CE0B-D53E-4F7B-9988-8A688EF6C68D} = {A5C7DC40-D57A-4AE0-AD35-9487E403FBF3}
+		{421AAEB1-29CA-4496-8BAB-3C2EEC053E79} = {A5C7DC40-D57A-4AE0-AD35-9487E403FBF3}
+		{3B7ADA95-B0BE-4852-B9F6-13F62A39B885} = {E9BA4968-9059-43F7-B255-CAB61F3732C0}
+	EndGlobalSection
+EndGlobal

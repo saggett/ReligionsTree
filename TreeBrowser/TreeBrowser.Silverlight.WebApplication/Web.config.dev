@@ -1,0 +1,86 @@
+﻿<?xml version="1.0"?>
+<configuration>
+  <appSettings>
+    <add key="CslaUseBinaryXml" value="false"/>
+  </appSettings>
+	<connectionStrings>
+		<remove name="LocalSqlServer"/>
+		<add name="Main.ConnectionString" connectionString="Server=localhost;Initial Catalog=Lineages;user id=sa;password=gp9dX7L2" providerName="System.Data.SqlClient"/>
+	</connectionStrings>
+	<system.web>
+		<!-- 
+            Set compilation debug="true" to insert debugging 
+            symbols into the compiled page. Because this 
+            affects performance, set this value to true only 
+            during development.
+        -->
+		<compilation debug="true" targetFramework="4.0">
+		</compilation>
+		<!--
+            The <authentication> section enables configuration 
+            of the security authentication mode used by 
+            ASP.NET to identify an incoming user. 
+        -->
+		<authentication mode="Windows"/>
+		<!--
+            The <customErrors> section enables configuration 
+            of what to do if/when an unhandled error occurs 
+            during the execution of a request. Specifically, 
+            it enables developers to configure html error pages 
+            to be displayed in place of a error stack trace.
+
+        <customErrors mode="RemoteOnly" defaultRedirect="GenericErrorPage.htm">
+            <error statusCode="403" redirect="NoAccess.htm" />
+            <error statusCode="404" redirect="FileNotFound.htm" />
+        </customErrors>
+        -->
+		<pages controlRenderingCompatibilityVersion="3.5" clientIDMode="AutoID">
+			<controls>
+				<add tagPrefix="csla" namespace="Csla.Web" assembly="Csla.Web"/>
+			</controls>
+		</pages>
+		<membership defaultProvider="SqlMembershipProvider" userIsOnlineTimeWindow="15">
+			<providers>
+				<clear/>
+				<add name="SqlMembershipProvider" type="System.Web.Security.SqlMembershipProvider" connectionStringName="Main.ConnectionString" applicationName="TreeBrowser" enablePasswordRetrieval="false" enablePasswordReset="true" requiresQuestionAndAnswer="true" requiresUniqueEmail="true" passwordFormat="Clear"/>
+			</providers>
+		</membership>
+		<roleManager defaultProvider="SqlRoleProvider" enabled="true" cacheRolesInCookie="true">
+			<providers>
+				<clear/>
+				<add name="SqlRoleProvider" type="System.Web.Security.SqlRoleProvider" connectionStringName="Main.ConnectionString" applicationName="TreeBrowser"/>
+			</providers>
+		</roleManager>
+	</system.web>
+	<!-- 
+        The system.webServer section is required for running ASP.NET AJAX under Internet
+        Information Services 7.0.  It is not necessary for previous version of IIS.
+    -->
+	<system.serviceModel>
+		<behaviors>
+			<serviceBehaviors>
+				<behavior name="WcfPortalBehavior">
+					<serviceDebug includeExceptionDetailInFaults="true"/>
+					<serviceMetadata httpGetEnabled="true"/>
+				</behavior>
+			</serviceBehaviors>
+		</behaviors>
+		<bindings>
+			<basicHttpBinding>
+				<binding name="BasicHttpBinding_IWcfPortal" maxBufferSize="10000000" maxReceivedMessageSize="10000000" receiveTimeout="00:10:00" sendTimeout="00:10:00" openTimeout="00:10:00" closeTimeout="00:10:00">
+					<readerQuotas maxBytesPerRead="10000000" maxArrayLength="10000000" maxStringContentLength="10000000"/>
+					<security mode="None"/>
+				</binding>
+			</basicHttpBinding>
+		</bindings>
+		<services>
+			<service behaviorConfiguration="WcfPortalBehavior" name="Csla.Server.Hosts.Silverlight.WcfPortal">
+				<endpoint address="" binding="basicHttpBinding" contract="Csla.Server.Hosts.Silverlight.IWcfPortal" bindingConfiguration="BasicHttpBinding_IWcfPortal">
+					<identity>
+						<dns value="localhost"/>
+					</identity>
+				</endpoint>
+			</service>
+		</services>
+	</system.serviceModel>
+</configuration>

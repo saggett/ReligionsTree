@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Divelements.SilverlightTools</name>
+    </assembly>
+    <members>
+        <member name="T:Divelements.SilverlightTools.HtmlHost">
+            <summary>
+            Provides the facility to host arbitrary HTML content.
+            </summary>
+        </member>
+        <member name="F:Divelements.SilverlightTools.HtmlHost.SourceHtmlProperty">
+            <summary>
+            Identifies the SourceHtml dependency property.
+            </summary>
+        </member>
+        <member name="F:Divelements.SilverlightTools.HtmlHost.SourceUriProperty">
+            <summary>
+            Identifies the SourceUri dependency property.
+            </summary>
+        </member>
+        <member name="M:Divelements.SilverlightTools.HtmlHost.#ctor">
+            <summary>
+            Initializes a new instance of the HtmlHost class.
+            </summary>
+        </member>
+        <member name="M:Divelements.SilverlightTools.HtmlHost.OnDocumentReady(System.EventArgs)">
+            <summary>
+            Raises the DocumentReady event.
+            </summary>
+            <param name="e">The arguments assocated with the event.</param>
+        </member>
+        <member name="E:Divelements.SilverlightTools.HtmlHost.DocumentReady">
+            <summary>
+            Occurs when the hosted document is ready for manipulation.
+            </summary>
+        </member>
+        <member name="P:Divelements.SilverlightTools.HtmlHost.Document">
+            <summary>
+            The document hosted within the control.
+            </summary>
+        </member>
+        <member name="P:Divelements.SilverlightTools.HtmlHost.SourceHtml">
+            <summary>
+            The HTML to display within the control.
+            </summary>
+        </member>
+        <member name="P:Divelements.SilverlightTools.HtmlHost.SourceUri">
+            <summary>
+            The URI of the content to be displayed in the control.
+            </summary>
+        </member>
+    </members>
+</doc>

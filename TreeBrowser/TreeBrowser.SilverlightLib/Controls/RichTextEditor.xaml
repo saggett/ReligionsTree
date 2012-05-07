@@ -1,0 +1,566 @@
+﻿<UserControl x:Class="TreeBrowser.SilverlightLib.Controls.RichTextEditor"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    xmlns:extended="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls"
+    xmlns:liquid="clr-namespace:Liquid;assembly=Liquid"
+    xmlns:liquidRichText="clr-namespace:Liquid;assembly=Liquid.RichText" 
+    xmlns:liquidMenu="clr-namespace:Liquid;assembly=Liquid.Menu"
+    xmlns:liquidPopup="clr-namespace:Liquid;assembly=Liquid.Popup"
+    Height="300">
+        <Grid Name="LayoutGrid">
+            <!--<Grid.Background>
+                <RadialGradientBrush GradientOrigin="0.9,0.9" Center="0.5,0.5" RadiusX="1.0" RadiusY="1.0">
+                    <GradientStop Color="#f0f0f0" Offset="0.0" />
+                    <GradientStop Color="#e0e0e0" Offset="0.6" />
+                    <GradientStop Color="#f0f0f0" Offset="1.0" />
+                </RadialGradientBrush>
+            </Grid.Background>-->
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+        <!--<Rectangle Width="770" Height="600" RadiusX="5" RadiusY="5" Stroke="#888888" StrokeThickness="1">
+            <Rectangle.Fill>
+                <RadialGradientBrush GradientOrigin="0.9,0.9" Center="0.5,0.5" RadiusX="1.0" RadiusY="1.0">
+                    <GradientStop Color="#f0f0f0" Offset="0.0" />
+                    <GradientStop Color="#e0e0e0" Offset="0.6" />
+                    <GradientStop Color="#f0f0f0" Offset="1.0" />
+                </RadialGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>-->
+        <liquidMenu:MainMenu x:Name="mainMenu" Canvas.ZIndex="1" Grid.Row="0" Margin="5,0"  ItemSelected="mainMenu_ItemSelected">
+            <liquidMenu:MainMenu.Items>
+                <liquidMenu:MainMenuItem Text="File">
+                    <liquidMenu:Menu>
+                        <liquidMenu:MenuItem ID="new" Icon="images/document.png" Text="New" />
+                        <liquidMenu:MenuDivider />
+                        <liquidMenu:MenuItem ID="save" Icon="images/save.png" Shortcut="Ctrl+S" Text="Save" />
+                        <liquidMenu:MenuItem ID="preview" Text="Preview" />
+                        <liquidMenu:MenuDivider />
+                        <liquidMenu:MenuItem ID="import" Text="Import" />
+                        <liquidMenu:MenuItem ID="export" Text="Export" />
+                        <liquidMenu:MenuDivider />
+                        <liquidMenu:MenuItem ID="exit" Text="Exit" />
+                    </liquidMenu:Menu>
+                </liquidMenu:MainMenuItem>
+                <liquidMenu:MainMenuItem Text="Edit">
+                    <liquidMenu:Menu>
+                        <liquidMenu:MenuItem ID="undo" Icon="images/undo.png" Shortcut="Ctrl+Z" Text="Undo" />
+                        <liquidMenu:MenuItem ID="redo" Icon="images/redo.png" Shortcut="Ctrl+Y" Text="Redo" />
+                        <liquidMenu:MenuDivider />
+                        <liquidMenu:MenuItem ID="cut" Icon="images/cut.png" Shortcut="Ctrl+X" Text="Cut" />
+                        <liquidMenu:MenuItem ID="copy" Icon="images/copy.png" Shortcut="Ctrl+C" Text="Copy" />
+                        <liquidMenu:MenuItem ID="paste" Icon="images/paste.png" Shortcut="Ctrl+V" Text="Paste" />
+                        <liquidMenu:MenuItem ID="delete" Icon="images/delete.png" Shortcut="Del" Text="Delete" />
+                        <liquidMenu:MenuDivider />
+                        <liquidMenu:MenuItem ID="selectAll" Text="Select All" Shortcut="Ctrl+A"  />
+                        <liquidMenu:MenuDivider />
+                        <liquidMenu:MenuItem ID="find" Text="Find" />
+                    </liquidMenu:Menu>
+                </liquidMenu:MainMenuItem>
+                <liquidMenu:MainMenuItem Text="View">
+                    <liquidMenu:Menu>
+                        <liquidMenu:MenuItem ID="500%" Text="500%" />
+                        <liquidMenu:MenuItem ID="400%" Text="400%" />
+                        <liquidMenu:MenuItem ID="300%" Text="300%" />
+                        <liquidMenu:MenuItem ID="200%" Text="200%" />
+                        <liquidMenu:MenuItem ID="150%" Text="150%" />
+                        <liquidMenu:MenuItem ID="120%" Text="120%" />
+                        <liquidMenu:MenuItem ID="110%" Text="110%" />
+                        <liquidMenu:MenuItem ID="100%" Text="100%" />
+                        <liquidMenu:MenuItem ID="90%" Text="90%" />
+                        <liquidMenu:MenuItem ID="80%" Text="80%" />
+                        <liquidMenu:MenuItem ID="75%" Text="75%" />
+                        <liquidMenu:MenuItem ID="50%" Text="50%" />
+                        <liquidMenu:MenuItem ID="25%" Text="25%" />
+                    </liquidMenu:Menu>
+                </liquidMenu:MainMenuItem>
+                <liquidMenu:MainMenuItem Text="Format">
+                    <liquidMenu:Menu>
+                        <liquidMenu:MenuItem Text="Predefined">
+                            <liquidMenu:Menu>
+                                <liquidMenu:MenuItem ID="h1" Text="Heading 1" />
+                                <liquidMenu:MenuItem ID="h2" Text="Heading 2" />
+                                <liquidMenu:MenuItem ID="h3" Text="Heading 3" />
+                                <liquidMenu:MenuItem ID="normal" Text="Normal" />
+                            </liquidMenu:Menu>
+                        </liquidMenu:MenuItem>
+                        <liquidMenu:MenuDivider />
+                        <liquidMenu:MenuItem Text="Horizontal Alignment">
+                            <liquidMenu:Menu>
+                                <liquidMenu:MenuItem ID="left" Icon="images/left.png" Text="Left" />
+                                <liquidMenu:MenuItem ID="center" Icon="images/center.png" Text="Center" />
+                                <liquidMenu:MenuItem ID="right" Icon="images/right.png" Text="Right" />
+                            </liquidMenu:Menu>
+                        </liquidMenu:MenuItem>
+                        <liquidMenu:MenuItem Text="Vertical Alignment">
+                            <liquidMenu:Menu>
+                                <liquidMenu:MenuItem ID="top" Text="Top" />
+                                <liquidMenu:MenuItem ID="middle" Text="Middle" />
+                                <liquidMenu:MenuItem ID="bottom" Text="Bottom" />
+                            </liquidMenu:Menu>
+                        </liquidMenu:MenuItem>
+                        <liquidMenu:MenuItem ID="bold" Text="Bold" />
+                        <liquidMenu:MenuItem ID="italic" Text="Italic" />
+                        <liquidMenu:MenuItem ID="underline" Text="Underline" />
+                        <liquidMenu:MenuDivider />
+                        <liquidMenu:MenuItem ID="subscript" Icon="images/subscript.png" Text="Subscript" />
+                        <liquidMenu:MenuItem ID="superscript" Icon="images/superscript.png" Text="Superscript" />
+                    </liquidMenu:Menu>
+                </liquidMenu:MainMenuItem>
+                <liquidMenu:MainMenuItem Text="Insert">
+                    <liquidMenu:Menu>
+                        <liquidMenu:MenuItem ID="numberedList" Icon="images/numbers.png" Text="Numbered List" />
+                        <liquidMenu:MenuItem ID="bulletedList" Icon="images/bullets.png" Text="Bulleted List" />
+                        <liquidMenu:MenuItem ID="bulletedImageList" Icon="images/cloud.png" Text="Bulleted Image List" />
+                        <liquidMenu:MenuDivider />
+                        <liquidMenu:MenuItem ID="link" Text="Hyperlink" />
+                        <liquidMenu:MenuDivider />
+                        <liquidMenu:MenuItem ID="insertTree" Text="TreeView" />
+                    </liquidMenu:Menu>
+                </liquidMenu:MainMenuItem>
+                <!--<liquidMenu:MainMenuItem Text="Table">
+                    <liquidMenu:Menu>
+                        <liquidMenu:MenuItem ID="insertTable" Text="Insert Table" />
+                        <liquidMenu:MenuDivider />
+                        <liquidMenu:MenuItem ID="insertRow" Text="Insert Row" />
+                        <liquidMenu:MenuItem ID="insertColumn" Text="Insert Column" />
+                        <liquidMenu:MenuDivider />
+                        <liquidMenu:MenuItem ID="deleteRow" Text="Delete Row" />
+                        <liquidMenu:MenuItem ID="deleteColumn" Text="Delete Column" />
+                        <liquidMenu:MenuDivider />
+                        <liquidMenu:MenuItem ID="formatTable" Text="Formatting" />
+                    </liquidMenu:Menu>
+                </liquidMenu:MainMenuItem>-->
+                <liquidMenu:MainMenuItem Text="Tools">
+                    <liquidMenu:Menu>
+                        <liquidMenu:MenuItem ID="readonly" Text="Read-only" />
+                        <liquidMenu:MenuDivider />
+                        <liquidMenu:MenuItem ID="elements" Text="Elements" />
+                        <liquidMenu:MenuItem ID="lines" Text="Lines" />
+                        <liquidMenu:MenuDivider />
+                        <liquidMenu:MenuItem ID="history" Text="History" />
+                        <liquidMenu:MenuItem ID="hilights" Text="Hilights" />
+                        <liquidMenu:MenuItem ID="selectedStyles" Text="Selected Styles" />
+                        <liquidMenu:MenuDivider />
+                        <liquidMenu:MenuItem ID="diagnostic" Text="Diagnostics" />
+                    </liquidMenu:Menu>
+                </liquidMenu:MainMenuItem>
+            </liquidMenu:MainMenu.Items>
+        </liquidMenu:MainMenu>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="1" >
+            <Button x:Name="preview" Width="24" Height="23" Click="preview_Click" Margin="11 4 2 4" ToolTipService.ToolTip="Preview">
+                <Image Source="images/preview.png" Stretch="None" />
+            </Button>
+            
+            <Button x:Name="applyCut" Width="24" Height="23" Click="Cut_Click" Margin="10, 2, 2, 2" ToolTipService.ToolTip="Cut">
+				<Image Source="images/cut.png" Stretch="None" />
+			</Button>
+
+			<Button x:Name="applyCopy" Width="24" Height="23" Click="Copy_Click" Margin="2" ToolTipService.ToolTip="Copy">
+				<Image Source="images/copy.png" Stretch="None" />
+			</Button>
+
+			<Button x:Name="applyPaste" Width="24" Height="23" Click="Paste_Click" Margin="2" ToolTipService.ToolTip="Paste">
+				<Image Source="images/paste.png" Stretch="None" />
+			</Button>
+
+			<!--<Button x:Name="applyPainter" Width="24" Height="23" Click="Painter_Click" Margin="2" ToolTipService.ToolTip="Format Painter">
+				<Image Source="images/painter.png" Stretch="None" />
+			</Button>-->
+
+			<Button x:Name="undo" Width="24" Height="23" Margin="10, 2, 2, 2" Click="Undo_Click" ToolTipService.ToolTip="Undo">
+				<Image Source="images/undo.png" Stretch="None" />
+			</Button>
+			<Button x:Name="redo" Width="24" Height="23" Margin="2" Click="Redo_Click" ToolTipService.ToolTip="Redo">
+				<Image Source="images/redo.png" Stretch="None" />
+			</Button>
+
+			<Button x:Name="makeBold" Width="24" Height="23" Click="MakeBold_Click" Margin="10, 2, 2, 2" ToolTipService.ToolTip="Bold">
+				<TextBlock x:Name="boldText" Text="B" FontFamily="Arial" FontSize="14" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" />
+			</Button>
+			<Button x:Name="makeItalic" Width="24" Height="23" Click="MakeItalic_Click" Margin="2" ToolTipService.ToolTip="Italic">
+				<TextBlock x:Name="italicText" Text="I" FontFamily="Arial" FontSize="14" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" />
+			</Button>
+			<Button x:Name="makeUnderline" Width="24" Height="23" Click="MakeUnderline_Click" Margin="2" ToolTipService.ToolTip="Underline">
+				<TextBlock x:Name="underlineText" Text="U" FontFamily="Arial" FontSize="14" TextDecorations="Underline" HorizontalAlignment="Center" VerticalAlignment="Center" />
+			</Button>
+			<!--<ComboBox x:Name="selectFontFamily" Width="155" Height="23" Margin="10, 2, 2, 2" SelectionChanged="SelectFontFamily_ItemSelected">
+				<ComboBoxItem Content="Arial" FontSize="14" FontFamily="Arial" IsSelected="True" />
+				<ComboBoxItem Content="Arial Black" FontSize="14" FontFamily="Arial Black" />
+				<ComboBoxItem Content="Comic Sans MS" FontSize="14" FontFamily="Comic Sans MS" />
+				<ComboBoxItem Content="Courier New" FontSize="14" FontFamily="Courier New" />
+				<ComboBoxItem Content="Lucida Grande" FontSize="14" FontFamily="Lucida Grande" />
+				<ComboBoxItem Content="Lucida Sans Unicode" FontSize="14" FontFamily="Lucida Sans Unicode" />
+				<ComboBoxItem Content="Times New Roman" FontSize="14" FontFamily="Times New Roman" />
+				<ComboBoxItem Content="Trebuchet MS" FontSize="14" FontFamily="Trebuchet MS" />
+				<ComboBoxItem Content="Verdana" FontSize="14" FontFamily="Verdana" />
+                <ComboBoxItem Content="Action Man" FontSize="14" FontFamily="Action Man Bold.ttf#Action Man" />
+			</ComboBox>-->
+
+			<ComboBox x:Name="selectFontSize" Width="45" Height="23" Margin="2" SelectionChanged="SelectFontSize_ItemSelected">
+				<ComboBoxItem Content="8" />
+				<ComboBoxItem Content="9" />
+				<ComboBoxItem Content="10" IsSelected="True" />
+				<ComboBoxItem Content="11" />
+				<ComboBoxItem Content="12" />
+				<ComboBoxItem Content="14" />
+				<ComboBoxItem Content="16" />
+				<ComboBoxItem Content="18" />
+				<ComboBoxItem Content="20" />
+				<ComboBoxItem Content="22" />
+				<ComboBoxItem Content="24" />
+				<ComboBoxItem Content="26" />
+				<ComboBoxItem Content="28" />
+				<ComboBoxItem Content="36" />
+				<ComboBoxItem Content="48" />
+				<ComboBoxItem Content="72" />
+			</ComboBox>
+            
+            <!--<liquid:ColorSelector x:Name="selectColor" Margin="10, 2, 2, 2" SelectionChanged="SelectColor_ItemSelected" />
+            <liquid:ColorSelector x:Name="selectBackground" Margin="2" SelectionChanged="SelectBackground_ItemSelected" />-->
+
+            <!--<ComboBox x:Name="selectShadow" Width="95" Height="23" Margin="10,2,2,2" SelectionChanged="SelectShadow_ItemSelected" ToolTipService.ToolTip="Text Shadow">
+                <ComboBoxItem Tag="None" Content="No Shadow" IsSelected="True" />
+                <ComboBoxItem Tag="Slight">
+                    <liquidRichText:TextBlockPlus Text="Slight" FontFamily="Arial" FontSize="14" Shadow="Slight" />
+                </ComboBoxItem>
+                <ComboBoxItem Tag="Normal">
+                    <liquidRichText:TextBlockPlus Text="Normal" FontFamily="Arial" FontSize="14" Shadow="Normal" />
+                </ComboBoxItem>
+            </ComboBox>-->
+        </StackPanel>
+
+		<StackPanel Orientation="Horizontal" Grid.Row="2">
+			<Button x:Name="makeLeft" Width="24" Height="23" Click="MakeLeft_Click" Margin="11 4 2 4" ToolTipService.ToolTip="Align Left">
+				<Image Source="images/left.png" Stretch="None" />
+			</Button>
+			<Button x:Name="makeCenter" Width="24" Height="23" Click="MakeCenter_Click" Margin="2" ToolTipService.ToolTip="Align Center">
+				<Image Source="images/center.png" Stretch="None" />
+			</Button>
+			<Button x:Name="makeRight" Width="24" Height="23" Click="MakeRight_Click" Margin="2" ToolTipService.ToolTip="Align Right">
+				<Image Source="images/right.png" Stretch="None" />
+			</Button>
+
+			<Button x:Name="indent" Width="24" Height="23" Margin="10, 2, 2, 2" Click="Indent_Click" ToolTipService.ToolTip="Increase Indent">
+				<Image Source="images/indent.png" Stretch="None" />
+			</Button>
+			<Button x:Name="outdent" Width="24" Height="23" Margin="2" Click="Outdent_Click" ToolTipService.ToolTip="Decrease Indent">
+				<Image Source="images/dedent.png" Stretch="None" />
+			</Button>
+
+			<Button x:Name="bulletList" Width="24" Height="23" Margin="10, 2, 2, 2" Click="BulletList_Click" ToolTipService.ToolTip="Bulleted List">
+				<Image Source="images/bullets.png" Stretch="None" />
+			</Button>
+			<Button x:Name="numberList" Width="24" Height="23" Margin="2" Click="NumberList_Click" ToolTipService.ToolTip="Numbered List">
+				<Image Source="images/numbers.png" Stretch="None" />
+			</Button>
+			
+			<Button x:Name="makeStrike" Width="24" Height="23" Margin="10, 2, 2, 2" Click="Strike_Click" ToolTipService.ToolTip="Strike-Through">
+				<Image Source="images/strike.png" Stretch="None" />
+			</Button>
+			<Button x:Name="makeLink" Width="24" Height="23" Margin="2" Click="Link_Click" ToolTipService.ToolTip="Hyperlink">
+				<Image Source="images/link.png" Stretch="None" />
+			</Button>
+
+			<Button x:Name="makeSuperscript" Width="24" Height="23" Margin="10, 2, 2, 2" Click="Superscript_Click" ToolTipService.ToolTip="Superscript">
+				<Image Source="images/superscript.png" Stretch="None" />
+			</Button>
+			<Button x:Name="makeSubscript" Width="24" Height="23" Margin="2" Click="Subscript_Click" ToolTipService.ToolTip="Subscript">
+				<Image Source="images/subscript.png" Stretch="None" />
+			</Button>
+
+            <!--<Button x:Name="insertTable" Width="24" Height="23" Margin="10, 2, 2, 2" Click="InsertTable_Click" ToolTipService.ToolTip="Insert Table">
+                <Image Source="images/table.png" Stretch="None" />
+            </Button>
+            <Button x:Name="editTable" Width="24" Height="23" Margin="2" IsEnabled="False" Click="EditTable_Click" ToolTipService.ToolTip="Edit Table">
+                <Image Source="images/editTable.png" Stretch="None" />
+            </Button>
+            
+            <Button x:Name="showStyle" Width="24" Height="23" Margin="10, 2, 2, 2" Click="ShowStyle_Click" ToolTipService.ToolTip="Styles">
+                <Image Source="images/style.png" Stretch="None" />
+            </Button>-->
+            
+            <!--<ComboBox x:Name="zoom" Width="70" Height="23" Margin="10, 2, 2, 2" SelectionChanged="Zoom_ItemSelected" ToolTipService.ToolTip="Zoom">
+                <ComboBoxItem Content="500%" />
+                <ComboBoxItem Content="400%" />
+                <ComboBoxItem Content="300%" />
+                <ComboBoxItem Content="200%" />
+                <ComboBoxItem Content="150%" />
+                <ComboBoxItem Content="120%" />
+                <ComboBoxItem Content="110%" />
+                <ComboBoxItem IsSelected="True" Content="100%" />
+                <ComboBoxItem Content="90%" />
+                <ComboBoxItem Content="80%" />
+                <ComboBoxItem Content="75%" />
+                <ComboBoxItem Content="50%" />
+                <ComboBoxItem Content="25%" />
+            </ComboBox>-->
+
+            <!--<ComboBox x:Name="insertImage" Width="75" Height="23" Margin="10, 2, 2, 2" SelectionChanged="InsertImage_ItemSelected" ToolTipService.ToolTip="Insert Image">
+				<ComboBoxItem>
+					<Image Source="images/bell.png" />
+				</ComboBoxItem>
+				<ComboBoxItem>
+					<Image Source="images/feed.png" />
+				</ComboBoxItem>
+				<ComboBoxItem>
+					<Image Source="images/house.png" />
+				</ComboBoxItem>
+				<ComboBoxItem>
+					<Image Source="images/telephone.png" />
+				</ComboBoxItem>
+				<ComboBoxItem>
+					<Image Source="images/tick.png" />
+				</ComboBoxItem>
+				<ComboBoxItem>
+					<Image Source="images/user.png" />
+				</ComboBoxItem>
+				<ComboBoxItem>
+					<Image Source="images/cloud.png" />
+				</ComboBoxItem>
+				<ComboBoxItem>
+					<Image Source="images/earth.png" />
+				</ComboBoxItem>
+				<ComboBoxItem>
+					<Image Source="images/shield.png" />
+				</ComboBoxItem>
+				<ComboBoxItem>
+					<Image Source="images/tv.png" />
+				</ComboBoxItem>
+			</ComboBox>-->
+        </StackPanel>
+
+        <liquidRichText:RichTextBox Margin="10" x:Name="richTextBox" Grid.Row="3" EnableContextMenu="True" EnablePatternRecognition="True" LinkClicked="RichTextBox_LinkClicked">
+            <liquidRichText:RichTextBox.ContextMenu>
+                <liquidMenu:Menu x:Name="contextMenu" Visibility="Collapsed" ItemSelected="contextMenu_ItemSelected">
+                    <!--<liquidMenu:MenuItem ID="insertRow" Text="Insert Row" />
+                    <liquidMenu:MenuItem ID="insertColumn" Text="Insert Column" />
+                    <liquidMenu:MenuItem ID="deleteRow" Text="Delete Row" />
+                    <liquidMenu:MenuItem ID="deleteColumn" Text="Delete Column" />
+                    <liquidMenu:MenuDivider ID="tableDivider" />
+                    <liquidMenu:MenuItem ID="formatTable" Text="Table Formatting" />
+                    <liquidMenu:MenuDivider ID="tableDivider2" />-->
+                    <liquidMenu:MenuItem ID="cut" Text="Cut" Icon="images/cut.png" Shortcut="Ctrl+X" />
+                    <liquidMenu:MenuItem ID="copy" Text="Copy" Icon="images/copy.png" Shortcut="Ctrl+C" />
+                    <liquidMenu:MenuItem ID="paste" Text="Paste" Icon="images/paste.png" Shortcut="Ctrl+V" />
+                </liquidMenu:Menu>
+            </liquidRichText:RichTextBox.ContextMenu>
+        </liquidRichText:RichTextBox>
+                
+        <!--<TextBlock x:Name="lineStatus" Canvas.Left="10" Canvas.Top="570" />
+
+        <TextBlock x:Name="stat" Canvas.Left="600" Canvas.Top="5" Text="" />
+		<TextBlock x:Name="statStart" Canvas.Left="10" Canvas.Top="655" Text="" />
+		<TextBlock x:Name="statEnd" Canvas.Left="10" Canvas.Top="675" Text="" Visibility="Collapsed" />-->
+
+        <liquidPopup:Dialog x:Name="findPopup" Width="214" Height="64" Buttons="None" IsMaximizeEnabled="False" IsMinimizeEnabled="False" Title="Enter Search Terms">
+            <StackPanel Orientation="Horizontal">
+                <TextBox x:Name="searchTerms" Width="150" Height="24" Margin="2" />
+                <Button x:Name="search" Width="50" Height="23" Content="Search" Margin="2" Click="Search_Click" />
+            </StackPanel>
+        </liquidPopup:Dialog>
+                
+        <liquidPopup:Dialog x:Name="enterURL" Width="254" Height="110" Title="Enter URL" Closed="EnterURL_Closed">
+            <Grid>
+                <TextBox x:Name="url" Width="238" Height="22" Margin="2 16 0 0" FontFamily="Arial" FontSize="14" Text="http://www.silverlight.net" />
+            </Grid>
+		</liquidPopup:Dialog>
+        
+        <!--<liquidPopup:Dialog x:Name="insertEditTableDialog" Width="240" Height="350" Closed="insertEditTable_Closed" IsMinimizeEnabled="False" IsMaximizeEnabled="False">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="90" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition Height="90" />
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" Text="Number of Columns" />
+                <TextBlock Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" Text="Number of Rows" />
+                <TextBlock Grid.Column="0" Grid.Row="2" VerticalAlignment="Center" Text="Table Style" />
+                <TextBox x:Name="tableColumns" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" Text="3" />
+                <TextBox x:Name="tableRows" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" Text="3" />
+                <ComboBox x:Name="tableStyle" Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" SelectionChanged="tableStyle_SelectionChanged">
+                    <ComboBoxItem Tag="TableDefault" IsSelected="True">
+                        <liquidRichText:Table Width="50" Height="20" IsEditable="False" BorderBrush="#000000" BorderThickness="1" CellBorderBrush="#000000" CellBorderThickness="1">
+                            <liquidRichText:Table.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </liquidRichText:Table.ColumnDefinitions>
+                            <liquidRichText:Table.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                            </liquidRichText:Table.RowDefinitions>
+                        </liquidRichText:Table>
+                    </ComboBoxItem>
+                    <ComboBoxItem Tag="TableBlue">
+                        <liquidRichText:Table Width="50" Height="20" IsEditable="False" HeaderRows="1" BorderBrush="#d7e5ed" BorderThickness="1" CellBorderBrush="#d7e5ed" CellBorderThickness="1">
+                            <liquidRichText:Table.HeaderFill>
+                                <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                    <GradientStop Color="#f6fbfd" Offset="0.0" />
+                                    <GradientStop Color="#d5effc" Offset="0.9" />
+                                    <GradientStop Color="#e7f5fd" Offset="0.9" />
+                                    <GradientStop Color="#e7f5fd" Offset="1.0" />
+                                </LinearGradientBrush>
+                            </liquidRichText:Table.HeaderFill>
+                            <liquidRichText:Table.Background>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                    <GradientStop Color="#f8f8f8" Offset="0" />
+                                    <GradientStop Color="#ffffff" Offset="1" />
+                                </LinearGradientBrush>
+                            </liquidRichText:Table.Background>
+                            <liquidRichText:Table.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </liquidRichText:Table.ColumnDefinitions>
+                            <liquidRichText:Table.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                            </liquidRichText:Table.RowDefinitions>
+                        </liquidRichText:Table>
+                    </ComboBoxItem>
+                    <ComboBoxItem Tag="TableGreen">
+                        <liquidRichText:Table Width="50" Height="20" IsEditable="False" HeaderRows="1" BorderBrush="#b0eeb0" BorderThickness="2" CellBorderBrush="#b0eeb0" CellBorderThickness="1">
+                            <liquidRichText:Table.HeaderFill>
+                                <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                    <GradientStop Color="#c0ffc0" Offset="0.0" />
+                                    <GradientStop Color="#b0eeb0" Offset="1.0" />
+                                </LinearGradientBrush>
+                            </liquidRichText:Table.HeaderFill>
+                            <liquidRichText:Table.Background>
+                                <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                    <GradientStop Color="#f0fff0" Offset="0.0" />
+                                    <GradientStop Color="#ffffff" Offset="1.0" />
+                                </LinearGradientBrush>
+                            </liquidRichText:Table.Background>
+                            <liquidRichText:Table.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </liquidRichText:Table.ColumnDefinitions>
+                            <liquidRichText:Table.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                            </liquidRichText:Table.RowDefinitions>
+                        </liquidRichText:Table>
+                    </ComboBoxItem>
+                    <ComboBoxItem Tag="TableRed">
+                        <liquidRichText:Table x:Name="TableRed" Width="50" Height="20" IsEditable="False" HeaderColumns="1" CellFill="#fff0f0" HeaderFill="#ffdddd" BorderBrush="#ff8888" BorderThickness="1" CellBorderBrush="#ff8888" CellBorderThickness="1">
+                            <liquidRichText:Table.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </liquidRichText:Table.ColumnDefinitions>
+                            <liquidRichText:Table.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                            </liquidRichText:Table.RowDefinitions>
+                        </liquidRichText:Table>
+                    </ComboBoxItem>
+                </ComboBox>
+                <TextBlock Grid.Row="3" Grid.ColumnSpan="2" VerticalAlignment="Top" Text="Preview" />
+                <liquidRichText:Table x:Name="tablePreview" Tag="TableDefault" Grid.Row="3" Grid.ColumnSpan="2" Width="210" Height="60" IsEditable="False" VerticalAlignment="Bottom" Margin="0 0 0 10" CellBorderBrush="#000000" CellBorderThickness="1" BorderBrush="#000000" BorderThickness="1">
+                    <liquidRichText:Table.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </liquidRichText:Table.ColumnDefinitions>
+                    <liquidRichText:Table.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                    </liquidRichText:Table.RowDefinitions>
+                </liquidRichText:Table>
+            </Grid>
+        </liquidPopup:Dialog>-->
+        
+		<liquidPopup:Dialog x:Name="exportPopup" Width="400" Height="400" Title="Export Rich Text To..." Buttons="Close" IsMaximizeEnabled="False" IsMinimizeEnabled="False">
+			<Canvas Margin="2">
+				<StackPanel Orientation="Horizontal" Canvas.ZIndex="1">
+					<ComboBox x:Name="exportFormat" Width="150">
+						<ComboBoxItem Content="HTML" />
+						<ComboBoxItem Content="XML" />
+                        <ComboBoxItem Content="XAML" />
+						<ComboBoxItem Content="Plain Text" />
+					</ComboBox>
+					<Button x:Name="updateExportedText" Width="60" Content="Go!" Margin="4 0 0 0" Click="UpdateExportedText_Click" />
+				</StackPanel>
+				<TextBox x:Name="exportedText" Canvas.Top="30" Canvas.ZIndex="0" AcceptsReturn="True" TextWrapping="Wrap" Width="390" Height="300" VerticalScrollBarVisibility="Auto" />
+			</Canvas>
+		</liquidPopup:Dialog>
+
+		<liquidPopup:Dialog x:Name="importPopup" Width="400" Height="400" Title="Import Rich Text From..." Buttons="Close"  IsMaximizeEnabled="False" IsMinimizeEnabled="False">
+			<Canvas Margin="2">
+				<StackPanel Orientation="Horizontal">
+					<ComboBox x:Name="importFormat" Width="150">
+						<ComboBoxItem Content="HTML" />
+						<ComboBoxItem Content="XML" />
+						<ComboBoxItem Content="Plain Text" />
+					</ComboBox>
+					<Button x:Name="updateImportedText" Width="60" Content="Go!" Margin="4 0 0 0" Click="UpdateImportedText_Click" />
+				</StackPanel>
+				<TextBox x:Name="importText" Canvas.Top="30" AcceptsReturn="True" TextWrapping="Wrap" Width="390" Height="300" VerticalScrollBarVisibility="Auto" />
+			</Canvas>
+		</liquidPopup:Dialog>
+        
+        <liquidPopup:MessageBox x:Name="infoDialog" />
+
+        <liquidPopup:Dialog x:Name="selectionStylePopup" Width="400" Height="400" Title="Selected Styles List" Buttons="Close" IsMaximizeEnabled="False" IsMinimizeEnabled="False">
+            <ScrollViewer x:Name="selectionStyleContainer" Margin="2">
+                <StackPanel x:Name="selectionStyleList" />
+            </ScrollViewer>
+        </liquidPopup:Dialog>
+
+        <liquidPopup:Dialog x:Name="elementsPopup" Width="400" Height="400" Title="Rich Text Element List" Buttons="Close" IsMaximizeEnabled="False" IsMinimizeEnabled="False">
+			<ScrollViewer x:Name="elementContainer" Margin="2">
+				<StackPanel x:Name="elementList" />
+			</ScrollViewer>
+		</liquidPopup:Dialog>
+
+		<liquidPopup:Dialog x:Name="visualPopup" Width="400" Height="400" Title="Rich Text Line List" Buttons="Close" IsMaximizeEnabled="False" IsMinimizeEnabled="False">
+			<ScrollViewer x:Name="visualContainer" Margin="2">
+				<StackPanel x:Name="visualList" />
+			</ScrollViewer>
+		</liquidPopup:Dialog>
+
+		<liquidPopup:Dialog x:Name="historyPopup" Width="400" Height="400" Title="Undo/Redo History" Buttons="Close" IsMaximizeEnabled="False" IsMinimizeEnabled="False">
+			<ScrollViewer x:Name="historyContainer" Margin="2">
+				<StackPanel x:Name="historyList" />
+			</ScrollViewer>
+		</liquidPopup:Dialog>
+		
+		<!--<liquidPopup:Dialog x:Name="hilightPopup" Width="400" Height="400" Title="Spell Checker Hilights" Buttons="Close" IsMaximizeEnabled="False" IsMinimizeEnabled="False">
+			<ScrollViewer x:Name="hilightContainer" Width="390" Height="330" Margin="2">
+				<StackPanel x:Name="hilightList" />
+			</ScrollViewer>
+		</liquidPopup:Dialog>-->
+
+        <liquidPopup:Dialog x:Name="diagnosticPopup" Width="400" Height="400" Title="Diagnostics" Buttons="Close" IsMaximizeEnabled="False" IsMinimizeEnabled="False">
+            <ScrollViewer Width="390" Height="330" Margin="2">
+                <StackPanel x:Name="diagnosticList" />
+            </ScrollViewer>
+        </liquidPopup:Dialog>
+
+        <liquidPopup:Dialog x:Name="previewPopup" Width="400" Height="400" Title="Document Preview" Buttons="Close" IsMaximizeEnabled="False" IsMinimizeEnabled="False">
+            <liquid:Viewer>
+                <liquidRichText:RichTextBlock x:Name="previewRichText" Width="600" />
+            </liquid:Viewer>
+        </liquidPopup:Dialog>
+        
+        <!--<liquidPopup:Dialog x:Name="stylePopup" Width="400" Height="400" Title="Document Styles" IsMaximizeEnabled="False" IsMinimizeEnabled="False" Closed="stylePopup_Closed">
+            <ListBox x:Name="selectStyle" />
+        </liquidPopup:Dialog>-->
+    </Grid>
+</UserControl>

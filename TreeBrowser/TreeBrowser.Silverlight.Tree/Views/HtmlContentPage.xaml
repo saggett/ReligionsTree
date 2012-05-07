@@ -1,0 +1,17 @@
+﻿<navigation:Page x:Class="TreeBrowser.Silverlight.Application.Views.HtmlContentPage" 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:navigation="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Navigation"
+    xmlns:tblib="clr-namespace:TreeBrowser.SilverlightLib.Controls;assembly=TreeBrowser.SilverlightLib"
+    xmlns:liquid="clr-namespace:Liquid;assembly=Liquid.RichText"
+    mc:Ignorable="d" d:DesignWidth="640" d:DesignHeight="480"
+    Title="About" 
+    Style="{StaticResource PageStyle}">
+
+    <Grid x:Name="LayoutRoot">
+        <!--<tblib:HtmlTextBlock x:Name="ContentHtmlBlock" Text="{Binding Content, Mode=OneWay}" TextWrapping="Wrap" HorizontalAlignment="Stretch" FontSize="11" Margin="0,0,0,0" />-->
+        <liquid:RichTextBlock x:Name="ContentRichTextBlock" HTML="{Binding Content, Mode=OneWay}" TextWrapping="Wrap" VerticalAlignment="Top" HorizontalAlignment="Stretch" FontSize="13" Margin="0,0,0,0" LinkClicked="ContentRichTextBlock_LinkClicked" />
+    </Grid>
+
+</navigation:Page>

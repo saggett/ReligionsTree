@@ -1,0 +1,43 @@
+﻿<navigation:Page x:Class="TreeBrowser.Silverlight.Application.Views.About" 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:navigation="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Navigation"
+    xmlns:tblib="clr-namespace:TreeBrowser.SilverlightLib.Controls;assembly=TreeBrowser.SilverlightLib"
+    mc:Ignorable="d" d:DesignWidth="640" d:DesignHeight="480"
+    Title="About" 
+    Style="{StaticResource PageStyle}">
+
+    <Grid x:Name="LayoutRoot">
+        <StackPanel x:Name="ContentStackPanel" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+
+            <TextBlock x:Name="HeaderText" Style="{StaticResource HeaderTextStyle}" 
+                           Text="About"/>
+            <TextBlock x:Name="ContentText1" Style="{StaticResource ContentTextStyle}">
+                This site is an attempt to illustrate the evolution of the world's religions in the form of a tree. In many cases this oversimplifies the multiple influences that gave rise to the beliefs and traditions of a given religion, but I believe that it's a worthwhile undertaking nonetheless.
+            </TextBlock>
+            <TextBlock x:Name="ContentText2" Style="{StaticResource ContentTextStyle}">
+                    The start and end dates of each religion and the descriptions of each are under continual revision. Where there is uncertainty surrounding the start date of any given religion, I've gone with the latest date of the range of possibilities.
+            </TextBlock>
+            <TextBlock x:Name="ContactHeaderText" Style="{StaticResource HeaderTextStyle}" 
+                           Text="Contact Me"/>
+            <TextBlock x:Name="ContentText3" Style="{StaticResource ContentTextStyle}" 
+                           Text="If you wish to do any of the following:"/>
+            <TextBlock x:Name="ContentText4" Style="{StaticResource BulletPointTextStyle}" 
+                           Text="• Report a bug"/>
+            <TextBlock x:Name="ContentText5" Style="{StaticResource BulletPointTextStyle}" 
+                           Text="• Report an inaccuracy"/>
+            <TextBlock x:Name="ContentText6" Style="{StaticResource BulletPointTextStyle}" 
+                           Text="• Request a feature"/>
+            <TextBlock x:Name="ContentText7" Style="{StaticResource BulletPointTextStyle}" 
+                           Text="• Contribute text for one or more religions"/>
+            <TextBlock x:Name="ContentText8" Style="{StaticResource BulletPointTextStyle}" 
+                           Text="• Thank me for constructing such a wonderful site"/>
+            <TextBlock x:Name="ContentText9" Style="{StaticResource ContentTextStyle}" 
+                           Text="Please email me at:"/>
+            <HyperlinkButton x:Name="EmailAddressLink" Click="EmailAddressLink_Click" FontSize="12" Content="webmaster@religionstree.com" />
+            <TextBlock x:Name="ContentText10" Style="{StaticResource ContentTextStyle}" Text="Please note that any corrections or contributions must be supported with references to reputable sources. " />
+        </StackPanel>
+    </Grid>
+
+</navigation:Page>

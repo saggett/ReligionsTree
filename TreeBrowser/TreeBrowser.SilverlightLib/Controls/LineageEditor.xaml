@@ -1,0 +1,99 @@
+﻿<UserControl xmlns:controls="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Data.Input"  x:Class="TreeBrowser.SilverlightLib.Controls.LineageEditor"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    xmlns:tblib="clr-namespace:TreeBrowser.SilverlightLib.Controls"
+    xmlns:csla="clr-namespace:Csla.Xaml;assembly=Csla.Xaml"
+    xmlns:data="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Data" >
+
+    <StackPanel x:Name="LayoutRoot" Visibility="Collapsed" >
+        <tblib:HtmlIntroControl x:Name="IntroTextBlock" HorizontalAlignment="Stretch" Margin="10,0" />
+        <StackPanel Name="LineageDetailsPanel" Margin="10,0">
+            <TextBlock FontWeight="Bold" Name="TitleText" Text="{Binding Name, Mode=OneWay}" TextWrapping="Wrap" HorizontalAlignment="Stretch" Margin="0,0,0,10" />
+            <TextBlock Name="FoundingText" Text="{Binding FoundingText, Mode=OneWay}" TextWrapping="Wrap" HorizontalAlignment="Stretch" Margin="0,0,0,0" />
+            <HyperlinkButton Name="SetAsRootHyperlinkButton" Visibility="Collapsed" Click="SetAsRootHyperlinkButton_Click" Margin="0,10" HorizontalContentAlignment="Left" >
+                <TextBlock Text="{Binding Name, Mode=OneWay, StringFormat='Redraw the tree with {0} at the root'}" ToolTipService.ToolTip="{Binding Name, Mode=OneWay, StringFormat='Draws a new tree showing only {0} and its descendants.'}" TextWrapping="Wrap">                   
+                </TextBlock>
+            </HyperlinkButton>
+            <tblib:HtmlTextBlock x:Name="NotesText" Text="{Binding Notes, Mode=OneWay}" TextWrapping="Wrap" HorizontalAlignment="Stretch" FontSize="11" Margin="0,0,0,0" />
+            <controls:Label FontWeight="Bold" Name="ExternalLinksLabel" Content="External Links" Visibility="Collapsed" Margin="0,10,0,0" />
+            <ItemsControl ItemsSource="{Binding Hyperlinks, Mode=OneWay}" HorizontalAlignment="Stretch" BorderBrush="Transparent" Margin="0,10" ScrollViewer.HorizontalScrollBarVisibility="Hidden"  >
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <HyperlinkButton NavigateUri="{Binding Url}" TargetName="_blank" Content="{Binding Caption}" ToolTipService.ToolTip="{Binding Url}">
+                        </HyperlinkButton>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+            <!--<HyperlinkButton Name="LineageLabel" Content="Wikipedia Link" NavigateUri="{Binding WikipediaArticleUrl, Mode=OneWay}" Margin="0,10" 
+                         TargetName="_blank" ToolTipService.ToolTip="{Binding WikipediaArticleUrl, Mode=OneWay}">
+            </HyperlinkButton>-->
+        </StackPanel>
+        <Grid Name="EditorControls" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="10" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="200" /> 
+                <RowDefinition Height="40" />
+                <RowDefinition Height="300" />
+            </Grid.RowDefinitions>
+            <controls:Label Name="LineageNameLabel" FontWeight="Bold"  Content="Name" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0" />
+            <controls:Label Name="ParentLineageLabel" FontWeight="Bold" Content="Parent Lineage" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0" />
+            <controls:Label Name="LineageGroupLabel" FontWeight="Bold" Content="Lineage Group" Grid.Column="0" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0" />
+            <controls:Label Name="StartYearLabel" FontWeight="Bold" Content="Start Year" Grid.Column="0" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0" />
+            <controls:Label Name="EndYearLabel" FontWeight="Bold" Content="End Year" Grid.Column="0" Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0" />
+            <controls:Label Name="HyperlinksLabel" FontWeight="Bold" Content="Hyperlinks" Grid.Column="0" Grid.Row="5" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0" />
+            <controls:Label Name="NotesLabel" FontWeight="Bold" Content="Notes" Grid.Column="0" Grid.Row="7" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0" />
+            <TextBox Name="LineageNameTextBox" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="10,0" Height="25"
+               Text="{Binding Name, Mode=TwoWay}" />
+            <TextBox Name="ParentLineageTextBox" Text="{Binding ParentName, Mode=OneWay}" Grid.Column="1" Grid.Row="1" Height="25" Margin="10,0" IsReadOnly="True" />
+            <tblib:ComboBox x:Name="LineageGroupComboBox" Grid.Column="1" Grid.Row="2" Height="25" Margin="10,0" Background="White" ItemsSource="{Binding}" ValueMemberPath="Id" DisplayMemberPath="Name" SelectionChanged="LineageGroupComboBox_SelectionChanged" />
+            <TextBox Name="StartYearTextBox" Text="{Binding StartYear, Mode=TwoWay}" Grid.Column="1" Grid.Row="3" Height="25" Width="70" HorizontalAlignment="Left" Margin="10,0" />
+            <TextBox Name="EndYearTextBox" Text="{Binding EndYear, Mode=TwoWay}" Grid.Column="1" Grid.Row="4" Height="25" Width="70" HorizontalAlignment="Left" Margin="10,0" />
+
+
+            <data:DataGrid x:Name="LinksGrid" Grid.Row="5" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10,5"
+                           ItemsSource="{Binding Hyperlinks, ValidatesOnExceptions=true, NotifyOnValidationError=true}" AutoGenerateColumns="False" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Visible" SelectionMode="Single">
+                <data:DataGrid.Columns>
+                    <csla:ValidatedDataGridTextColumn Binding="{Binding Path=Caption}" Header="Caption" Width="200" />
+                    <csla:ValidatedDataGridTextColumn Binding="{Binding Path=Description}" Header="Description" Width="60" />
+                    <csla:ValidatedDataGridTextColumn Binding="{Binding Path=Url}" Header="URL" Width="80" />
+                    <data:DataGridTemplateColumn Width="60">
+                        <data:DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button x:Name="DeleteLink" Content="Delete" Tag="{Binding}" Click="DeleteLinkRow_Click"/>
+                            </DataTemplate>
+                        </data:DataGridTemplateColumn.CellTemplate>
+                    </data:DataGridTemplateColumn>
+                </data:DataGrid.Columns>
+            </data:DataGrid>
+            <Button x:Name="AddLinkButton" Content="Add New" Width="60" Height="23" HorizontalAlignment="Right" Margin="10,0" Click="AddLinkButton_Click"  Grid.Row="6" Grid.Column="1"/>
+
+            <TextBox Name="NotesTextBox" Grid.Column="1" Grid.Row="7" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="11" Margin="0,10" AcceptsReturn="True" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" TextWrapping="Wrap" 
+                     Text="{Binding Notes, Mode=TwoWay}" />
+
+            <csla:BusyAnimation x:Name="LineageBusyAnimation"
+                                HorizontalAlignment="Center" 
+                                VerticalAlignment="Center" 
+                                Width="64" 
+                                Height="64" 
+                                Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="7" />
+            <!--RichText="{Binding Notes, Mode=TwoWay}"-->
+        </Grid>
+        <StackPanel Name="ToolBar" Orientation="Horizontal" VerticalAlignment="Stretch" HorizontalAlignment="Center" Margin="40,0" >
+            <Button Name="EditButton" Content="Edit" IsEnabled="{Binding CanEdit}" Click="EditButton_Click" Width="70" Height="23" Margin="10,0" />
+            <Button Name="AddOffshootButton" Content="Add Offshoot" IsEnabled="{Binding CanCreate}" Click="AddOffshootButton_Click" Width="90" Height="23" Margin="10,0" />
+            <Button Name="SaveButton" Content="Save" Click="SaveButton_Click" Width="70" Height="23" Margin="10,0" />
+            <Button Name="DeleteButton" Content="Delete" IsEnabled="{Binding CanDelete}" Click="DeleteButton_Click" Width="70" Height="23" Margin="10,0" />
+            <Button Name="CancelButton" Content="Cancel" Click="CancelButton_Click" Width="70" Height="23" Margin="10,0" />
+        </StackPanel>
+    </StackPanel>
+</UserControl>
