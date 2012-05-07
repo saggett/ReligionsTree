@@ -66,6 +66,12 @@
     <Content Include="AuthoringTests.txt" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\TreeBrowser.Silverlight.Entities\TreeBrowser.Silverlight.Entities.csproj">
       <Project>{0D80CE0B-D53E-4F7B-9988-8A688EF6C68D}</Project>
       <Name>TreeBrowser.Silverlight.Entities</Name>
@@ -74,12 +80,6 @@
       <Project>{A18A821E-5746-4117-AA00-34687940CA78}</Project>
       <Name>TreeBrowser.SilverlightLib</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

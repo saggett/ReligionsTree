@@ -6,6 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
+using System.Windows.Printing;
 using Csla;
 using TreeBrowser.Entities;
 using TreeBrowser.Entities.Helpers;
@@ -19,6 +20,8 @@ namespace TreeBrowser.Silverlight.Application.Controls
 {
     public partial class Tree : UserControl
     {
+
+        PrintDocument printDocument = new PrintDocument();
 
         public event EventHandler<LineageIdEventArgs> NavigateRequest;
         public event EventHandler<LineageIdEventArgs> RootBindComplete;
@@ -34,10 +37,16 @@ namespace TreeBrowser.Silverlight.Application.Controls
             LineageEditorPanel.Deleted += LineageEditorPanel_Deleted;
             LineageEditorPanel.Saved += LineageEditorPanel_Saved;
             LineageEditorPanel.NavigateRequest += new EventHandler<LineageIdEventArgs>(LineageEditorPanel_NavigateRequest);
+            printDocument.PrintPage += new EventHandler<PrintPageEventArgs>(printDocument_PrintPage);
             ((App)System.Windows.Application.Current).LineagesCache.FetchLineagesCompleted += LineagesCache_FetchLineagesCompleted;
             //MouseMove += new System.Windows.Input.MouseEventHandler(Tree_MouseMove);
             //Application.Current.Host.Content.Resized += new EventHandler(Content_Resized);
             //LoadData();
+        }
+
+        private void printDocument_PrintPage(object sender, PrintPageEventArgs e)
+        {
+            e.PageVisual = TreeCanvas;
         }
 
         private void LineageEditorPanel_NavigateRequest(object sender, LineageIdEventArgs e)
@@ -670,12 +679,20 @@ namespace TreeBrowser.Silverlight.Application.Controls
                 resetMi.Click += new RoutedEventHandler(resetMi_Click);
                 menu.Items.Add(resetMi);
             }
+            var printMi = new MenuItem() {Header = "Print"};
+            printMi.Click += new RoutedEventHandler(printMi_Click);
+            menu.Items.Add(printMi);
             //var saveJpgMi = new MenuItem() { Header = "Save as JPG" };
             //saveJpgMi.Click += new RoutedEventHandler(saveJpgMi_Click);
             //menu.Items.Add(saveJpgMi);
             menu.HorizontalOffset = point.X;
             menu.VerticalOffset = point.Y;
             menu.IsOpen = menu.Items.Count > 0;
+        }
+
+        private void printMi_Click(object sender, RoutedEventArgs e)
+        {
+            printDocument.Print("Tree", new PrinterFallbackSettings(){ForceVector = true}, false);
         }
 
         //private void saveJpgMi_Click(object sender, RoutedEventArgs e)
