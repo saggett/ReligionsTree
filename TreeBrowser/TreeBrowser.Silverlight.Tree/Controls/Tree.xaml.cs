@@ -46,7 +46,7 @@ namespace TreeBrowser.Silverlight.Application.Controls
 
         private void printDocument_PrintPage(object sender, PrintPageEventArgs e)
         {
-            e.PageVisual = TreeCanvas;
+            e.PageVisual = TreeGrid;
         }
 
         private void LineageEditorPanel_NavigateRequest(object sender, LineageIdEventArgs e)
